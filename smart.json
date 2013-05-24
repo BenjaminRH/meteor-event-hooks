@@ -1,6 +1,6 @@
 {
 	"name": "event-hooks",
-	"description": "Hooks for various events",
+	"description": "Provides hooks for various user-triggered events",
 	"homepage": "https://github.com/BenjaminRH/meteor-event-hooks",
 	"author": "Benjamin Harris  (http://benjaminrharris.com)",
 	"version": "0.2.0",

@@ -1,5 +1,5 @@
 Package.describe({
-	summary: "Provides hooks for various user-triggered events, such as losing window focus."
+	summary: "Provides hooks for various user-triggered events"
 });
 
 Package.on_use(function (api) {

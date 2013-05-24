@@ -8,25 +8,25 @@ Hooks = {
 	loggedIn: false,
 	checkFocus: function () {
 		// Check if the window is currently focused
-		if (document.hasFocus() && this.focused === false) {
+		if (document.hasFocus() && Hooks.focused === false) {
 			// We've gained focus
-			this.focused = true;
-			if (this.onGainFocus !== undefined) this.onGainFocus(); // Fire the event on the client
+			Hooks.focused = true;
+			if (Hooks.onGainFocus !== undefined) Hooks.onGainFocus(); // Fire the event on the client
 			Meteor.call('eventsOnGainFocus'); // Fire the event on the server
-		} else if (! document.hasFocus() && this.focused === true) {
+		} else if (! document.hasFocus() && Hooks.focused === true) {
 			// We've lost focus
-			this.focused = false;
-			if (this.onLoseFocus !== undefined) this.onLoseFocus(); // Fire the event on the client
+			Hooks.focused = false;
+			if (Hooks.onLoseFocus !== undefined) Hooks.onLoseFocus(); // Fire the event on the client
 			Meteor.call('eventsOnLoseFocus'); // Fire the event on the server
 		}
 	},
 	init: function () {
 		// Start checking for focus
-		Meteor.setInterval(this.checkFocus, this.updateFocus);
+		Meteor.setInterval(Hooks.checkFocus, Hooks.updateFocus);
 
 		// Close window/tab
 		window.onbeforeunload = function() {
-			if (this.onCloseSession !== undefined) this.onCloseSession(); // Fire the event on the client
+			if (Hooks.onCloseSession !== undefined) Hooks.onCloseSession(); // Fire the event on the client
 			Meteor.call('eventsOnCloseSession'); // Fire the event on the server
 		}
 	},
