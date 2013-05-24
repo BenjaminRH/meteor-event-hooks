@@ -3,13 +3,13 @@ Hooks = {
 		// Setup event listeners
 
 		// Lose focus
-		document.onblur = function () {
+		window.onblur = function () {
 			if (this.onLoseFocus !== undefined) this.onLoseFocus(); // Fire the event on the client
 			Meteor.call('eventsOnLoseFocus'); // Fire the event on the server
 		}
 
 		// Gain focus
-		document.onfocus = function () {
+		window.onfocus = function () {
 			if (this.onGainFocus !== undefined) this.onGainFocus(); // Fire the event on the client
 			Meteor.call('eventsOnGainFocus'); // Fire the event on the server
 		}
