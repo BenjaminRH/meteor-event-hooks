@@ -5,6 +5,7 @@ Provides hooks for various user-triggered events.
 
 ###API
 
+ * `Hooks.init()` (client) - Initializes the event system. Place this in your `Meteor.startup`
  * `Hooks.onLoseFocus = function () { ... }` (anywhere) - Provide a callback to run when the window loses focus
  * `Hooks.onGainFocus = function () { ... }` (anywhere) - Provide a callback to run when the window loses focus
  * `Hooks.onCloseSession = function () { ... }` (anywhere) - Provide a callback to run when the window/tab is closed
