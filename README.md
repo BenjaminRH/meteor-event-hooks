@@ -10,6 +10,8 @@ Provides hooks for various user-triggered events.
  * `Hooks.onLoseFocus = function () { ... }` (anywhere) - Provide a callback to run when the window loses focus
  * `Hooks.onGainFocus = function () { ... }` (anywhere) - Provide a callback to run when the window gains focus
  * `Hooks.onCloseSession = function () { ... }` (server) - Provide a callback to run when the window/tab is closed
+ * `Hooks.onLoggedIn = function () { ... }` (anywhere) - Provide a callback to run when a user has logged in
+ * `Hooks.onLoggedOut = function () { ... }` (anywhere) - Provide a callback to run when a user has logged out
 
 ###How to use?
 

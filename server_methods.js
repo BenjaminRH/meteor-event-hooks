@@ -1,4 +1,10 @@
-Hooks = {};
+Hooks = {
+	onLoseFocus:    function(){},
+	onGainFocus:    function(){},
+	onCloseSession: function(){},
+	onLoggedIn:     function(){},
+	onLoggedOut:    function(){}
+};
 
 Meteor.methods({
 	eventsOnLoseFocus: function () {
@@ -12,5 +18,13 @@ Meteor.methods({
 	eventsOnCloseSession: function () {
 		// Fire the closeSession event
 		if (Hooks.onCloseSession !== undefined) Hooks.onCloseSession();
+	},
+	eventsOnLoggedIn: function () {
+		// Fire the loggedIn event
+		if (Hooks.onLoggedIn !== undefined) Hooks.onLoggedIn();
+	},
+	eventsOnLoggedOut: function () {
+		// Fire the loggedOut event
+		if (Hooks.onLoggedOut !== undefined) Hooks.onLoggedOut();
 	}
 });
