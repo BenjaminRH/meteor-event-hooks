@@ -3,9 +3,15 @@
 //////////////////////////////////
 
 Hooks = {
+	// OPTIONS
 	updateFocus: 500, // Number of milliseconds to wait before checking whether the window is focused
+	treatCloseAsLogout: false,
+
+	// INTERNAL STATES
 	focused: true,
 	loggedIn: false,
+
+	// METHODS
 	checkFocus: function () {
 		// Check if the window is currently focused
 		if (document.hasFocus() && Hooks.focused === false) {
@@ -26,8 +32,12 @@ Hooks = {
 
 		// Close window/tab
 		window.onbeforeunload = function() {
-			if (Hooks.onCloseSession !== undefined) Hooks.onCloseSession(); // Fire the event on the client
 			Meteor.call('eventsOnCloseSession'); // Fire the event on the server
+
+			// If we're treating close as logout, fire the logout event as well
+			if (Hooks.treatCloseAsLogout === true) {
+				Meteor.call('eventsOnLoggedOut'); // Fire the event on the server
+			}
 		}
 	},
 	onLoseFocus:    function(){},
