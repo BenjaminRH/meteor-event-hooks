@@ -3,15 +3,26 @@
 //////////////////////////////////
 
 Hooks = {
-	// OPTIONS
+	//////////////////////////////////
+	//= OPTIONS
+	//////////////////////////////////
+
 	updateFocus: 0, // Number of milliseconds to wait before checking whether the window is focused
 	treatCloseAsLogout: false,
 
-	// INTERNAL STATES
+
+	//////////////////////////////////
+	//= INTERNAL STATES
+	//////////////////////////////////
+
 	focused: true,
 	loggedIn: false,
+	lastUserId: null,
 
-	// METHODS
+
+	//////////////////////////////////
+	//= METHODS
+	//////////////////////////////////
 	checkFocus: function () {
 		// Check if the window is currently focused
 		if (document.hasFocus() && Hooks.focused === false) {
@@ -27,11 +38,23 @@ Hooks = {
 		}
 	},
 	init: function (options) {
+		//////////////////////////////////
+		//= BASIC INITIALIZATION
+		//////////////////////////////////
+
+		// Fire up the server
+		Meteor.call('eventsOnHooksInit');
+
 		// Initialize options
-		if (options !== undefined) {
+		if (typeof options !== 'undefined') {
 			if (options.updateFocus) Hooks.updateFocus = options.updateFocus;
 			if (options.treatCloseAsLogout) Hooks.treatCloseAsLogout = options.treatCloseAsLogout;
 		}
+
+
+		//////////////////////////////////
+		//= INITIALIZE CLIENT EVENTS
+		//////////////////////////////////
 
 		// Start checking for focus if a truthy integer is given
 		if (Hooks.updateFocus != false) {
@@ -44,15 +67,22 @@ Hooks = {
 
 			// If we're treating close as logout, fire the logout event as well
 			if (Hooks.treatCloseAsLogout === true) {
-				Meteor.call('eventsOnLoggedOut'); // Fire the event on the server
+				Meteor.call('eventsOnLoggedOut', Hooks.lastUserId); // Fire the event on the server
 			}
 		}
 
-		// Setup login monitoring
-		Deps.autorun(function() {
+		
+
+		//////////////////////////////////
+		//= SETUP LOGIN MONITORING
+		//////////////////////////////////
+
+		Deps.autorun(function () {
 			if (Meteor.userId()) {
 				// User is logged in
 				if (Hooks.loggedIn === false) {
+					// Update the latest user id
+					Hooks.lastUserId = Meteor.userId();
 					// User wasn't logged in before this updated, so fire the loggedIn event
 					if (Hooks.onLoggedIn !== undefined) Hooks.onLoggedIn(); // Fire the event on the client
 					Meteor.call('eventsOnLoggedIn'); // Fire the event on the server
@@ -63,14 +93,18 @@ Hooks = {
 				// There is no user logged in right now
 				if (Hooks.loggedIn === true) {
 					// User was logged in before this updated, so fire the loggedOut event
-					if (Hooks.onLoggedOut !== undefined) Hooks.onLoggedOut(); // Fire the event on the client
-					Meteor.call('eventsOnLoggedOut'); // Fire the event on the server
+					if (Hooks.onLoggedOut !== undefined) Hooks.onLoggedOut(Hooks.lastUserId); // Fire the event on the client
+					Meteor.call('eventsOnLoggedOut', Hooks.lastUserId); // Fire the event on the server
 				}
 
 				Hooks.loggedIn = false; // Now set the proper state
 			}
 		});
 	},
+
+	//////////////////////////////////
+	//= DEFINE API METHODS
+	//////////////////////////////////
 	onLoseFocus:    function(){},
 	onGainFocus:    function(){},
 	onCloseSession: function(){},

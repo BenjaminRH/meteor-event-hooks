@@ -3,6 +3,7 @@ Package.describe({
 });
 
 Package.on_use(function (api) {
-	api.add_files(['event_hooks.js'], 'client');
-	api.add_files(['server_methods.js'], 'server');
+	api.add_files(['client.js'], 'client');
+	api.add_files(['server.js'], 'server');
+	api.add_files(['common.js'], ['client', 'server']);
 });
