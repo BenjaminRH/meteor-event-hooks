@@ -34,11 +34,12 @@ Currently, all API methods on the server take a `userId` argument.
 1. Install [meteorite](https://github.com/oortcloud/meteorite)
 2. `mrt add event-hooks`
 3. Add `Hooks.init()` to your `Meteor.startup` inside of a file inside your client/ directory or inside of an if(Meteor.isClient) block.
-
-    if(Meteor.isClient){
-    	Meteor.startup({
-    		Hooks.init();
-    	});
-	}
+```
+if(Meteor.isClient){
+	Meteor.startup({
+		Hooks.init();
+	});
+}
+```
 
 That's it!
