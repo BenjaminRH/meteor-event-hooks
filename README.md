@@ -25,6 +25,8 @@ Currently, all API methods on the server take a `userId` argument.
 
 ### Options
 
+Options are specified on the client side as an argument (object) in the `init` method.
+
  * `updateFocus` ( _Integer_ ) - Number of milliseconds to wait before checking whether the window is focused. Default is `0`, meaning unless you change this, the `onLoseFocus` and `onGainFocus` methods won't be available
  * `treatCloseAsLogout` ( _Boolean_ ) - If true, treat closing the browser window as logging off (meaning that the `onLoggedOut` callback is triggered in addition to the `onCloseSession`). Default is `false`
 
