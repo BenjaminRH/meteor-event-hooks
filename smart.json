@@ -3,7 +3,7 @@
 	"description": "Provides hooks for various user-triggered events",
 	"homepage": "https://github.com/BenjaminRH/meteor-event-hooks",
 	"author": "Benjamin Harris  (http://benjaminrharris.com)",
-	"version": "1.4.2",
+	"version": "1.4.3",
 	"git": "https://github.com/BenjaminRH/meteor-event-hooks.git",
 	"packages": {}
 }

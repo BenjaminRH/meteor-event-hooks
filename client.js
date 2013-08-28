@@ -28,12 +28,12 @@ Hooks = {
 		if (document.hasFocus() && Hooks.focused === false) {
 			// We've gained focus
 			Hooks.focused = true;
-			if (Hooks.onGainFocus !== undefined) Hooks.onGainFocus(); // Fire the event on the client
+			if (typeof Hooks.onGainFocus !== undefined) Hooks.onGainFocus(); // Fire the event on the client
 			Meteor.call('eventsOnGainFocus'); // Fire the event on the server
 		} else if (! document.hasFocus() && Hooks.focused === true) {
 			// We've lost focus
 			Hooks.focused = false;
-			if (Hooks.onLoseFocus !== undefined) Hooks.onLoseFocus(); // Fire the event on the client
+			if (typeof Hooks.onLoseFocus !== undefined) Hooks.onLoseFocus(); // Fire the event on the client
 			Meteor.call('eventsOnLoseFocus'); // Fire the event on the server
 		}
 	},
@@ -84,7 +84,7 @@ Hooks = {
 					// Update the latest user id
 					Hooks.lastUserId = Meteor.userId();
 					// User wasn't logged in before this updated, so fire the loggedIn event
-					if (Hooks.onLoggedIn !== undefined) Hooks.onLoggedIn(); // Fire the event on the client
+					if (typeof Hooks.onLoggedIn !== undefined) Hooks.onLoggedIn(); // Fire the event on the client
 					Meteor.call('eventsOnLoggedIn'); // Fire the event on the server
 				}
 
@@ -93,7 +93,7 @@ Hooks = {
 				// There is no user logged in right now
 				if (Hooks.loggedIn === true) {
 					// User was logged in before this updated, so fire the loggedOut event
-					if (Hooks.onLoggedOut !== undefined) Hooks.onLoggedOut(Hooks.lastUserId); // Fire the event on the client
+					if (typeof Hooks.onLoggedOut !== undefined) Hooks.onLoggedOut(Hooks.lastUserId); // Fire the event on the client
 					Meteor.call('eventsOnLoggedOut', Hooks.lastUserId); // Fire the event on the server
 				}
 
