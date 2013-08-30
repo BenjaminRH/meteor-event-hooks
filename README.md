@@ -39,7 +39,7 @@ Options are specified on the client side as an argument (object) in the `init` m
 
 ```
 if(Meteor.isClient){
-	Meteor.startup({
+	Meteor.startup(function(){
 		Hooks.init();
 	});
 }
