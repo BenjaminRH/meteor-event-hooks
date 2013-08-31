@@ -5,6 +5,9 @@ Package.describe({
 var both = ['client', 'server']
 
 Package.on_use(function (api) {
+	api.use('standard-app-packages');
+        api.use('accounts-base');
+    
 	api.add_files(['client.js'], 'client');
 	api.add_files(['server.js'], 'server');
 	api.add_files(['common.js'], both);
