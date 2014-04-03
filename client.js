@@ -42,9 +42,6 @@ Hooks = {
 		//= BASIC INITIALIZATION
 		//////////////////////////////////
 
-		// Fire up the server
-		Meteor.call('eventsOnHooksInit');
-
 		// Initialize options
 		if (typeof options !== 'undefined') {
 			if (options.updateFocus) Hooks.updateFocus = options.updateFocus;
@@ -71,7 +68,7 @@ Hooks = {
 			}
 		}
 
-		
+
 
 		//////////////////////////////////
 		//= SETUP LOGIN MONITORING
