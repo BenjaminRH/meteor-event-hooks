@@ -1,9 +1,6 @@
 ## Event Hooks - Meteor Smart Package
 
-[![endorse](https://api.coderwall.com/benjaminrh/endorsecount.png)](https://coderwall.com/benjaminrh)
-
 Provides hooks for various user-triggered events.
-
 
 ### API
 
@@ -17,11 +14,9 @@ Currently, all API methods on the server take a `userId` argument.
  * `Hooks.onGainFocus = function ([server: userId]) { ... }` ( _anywhere_ )* - Provide a callback to run when the window gains focus * Opt-in through the `updateFocus` option
  * `Hooks.onCloseSession = function ([server: userId]) { ... }` ( _server_ ) - Provide a callback to run when the window/tab is closed
 
-
 ### Initialization
 
  * `Hooks.init([options])` ( _client_ ) - Initialize the event system. Optionally provide an `Object` to set the options. Put this in your `Meteor.startup`
-
 
 ### Options
 
@@ -29,7 +24,6 @@ Options are specified on the client side as an argument (object) in the `init` m
 
  * `updateFocus` ( _Integer_ ) - Number of milliseconds to wait before checking whether the window is focused. Default is `0`, meaning unless you change this, the `onLoseFocus` and `onGainFocus` methods won't be available
  * `treatCloseAsLogout` ( _Boolean_ ) - If true, treat closing the browser window as logging off (meaning that the `onLoggedOut` callback is triggered in addition to the `onCloseSession`). Default is `false`
-
 
 ### How to use?
 
@@ -44,5 +38,3 @@ if(Meteor.isClient){
 	});
 }
 ```
-
-That's it!
